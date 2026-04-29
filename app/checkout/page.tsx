@@ -1,11 +1,10 @@
 'use client';
 import { useState } from 'react';
+import Link from 'next/link';
 import { useCart } from '@/components/CartProvider';
-import { useRouter } from 'next/navigation';
 
 export default function CheckoutPage() {
   const { items, total, clear } = useCart();
-  const router = useRouter();
   const shipping = total >= 500 ? 0 : 99;
   const orderTotal = total + shipping;
 
@@ -17,8 +16,12 @@ export default function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false);
 
   if (items.length === 0) {
-    router.push('/shop');
-    return null;
+    return (
+      <div style={{ textAlign: 'center', padding: '4rem 1.5rem' }}>
+        <p style={{ color: '#6B7280', marginBottom: '1.5rem' }}>Your cart is empty.</p>
+        <Link href="/shop" className="btn-primary">Browse Products →</Link>
+      </div>
+    );
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {

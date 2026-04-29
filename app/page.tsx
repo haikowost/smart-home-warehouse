@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import { getFeaturedProducts, CATEGORIES, Category } from '@/lib/products';
