@@ -8,7 +8,7 @@ import { useCart } from '@/components/CartProvider';
 export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const product = getProductBySlug(slug);
-  if (!product) notFound();
+  if (!product) return notFound();
 
   const { add } = useCart();
   const [qty, setQty] = useState(1);
