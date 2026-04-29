@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --shw: #9B59B6;
+  --shw-dk: #7D3C98;
+  --shw-lt: #F3E8FF;
+  --navy: #1A1A2E;
+  --bg: #F8F9FA;
+  --border: #E5E7EB;
+  --txt: #1F2937;
+  --muted: #6B7280;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+}
+
+.btn-primary {
+  background: var(--shw);
+  color: white;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.btn-primary:hover { background: var(--shw-dk); transform: translateY(-1px); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--shw);
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 2px solid var(--shw);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.btn-outline:hover { background: var(--shw); color: white; }
