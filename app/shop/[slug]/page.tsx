@@ -29,11 +29,11 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
     <div style={{ maxWidth: 1200, margin: '0 auto', padding: '2rem 1.5rem' }}>
       {/* Breadcrumb */}
       <nav style={{ marginBottom: '1.5rem', fontSize: '0.82rem', color: '#6B7280' }}>
-        <Link href="/" style={{ color: '#9B59B6', textDecoration: 'none' }}>Home</Link>
+        <Link href="/" style={{ color: '#1E40AF', textDecoration: 'none' }}>Home</Link>
         <span style={{ margin: '0 0.4rem' }}>›</span>
-        <Link href="/shop" style={{ color: '#9B59B6', textDecoration: 'none' }}>Shop</Link>
+        <Link href="/shop" style={{ color: '#1E40AF', textDecoration: 'none' }}>Shop</Link>
         <span style={{ margin: '0 0.4rem' }}>›</span>
-        <Link href={`/shop?cat=${product.category}`} style={{ color: '#9B59B6', textDecoration: 'none' }}>{CATEGORIES[product.category]}</Link>
+        <Link href={`/shop?cat=${product.category}`} style={{ color: '#1E40AF', textDecoration: 'none' }}>{CATEGORIES[product.category]}</Link>
         <span style={{ margin: '0 0.4rem' }}>›</span>
         <span>{product.name}</span>
       </nav>
@@ -51,7 +51,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
 
         {/* Info */}
         <div>
-          <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.7rem', color: '#9B59B6', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>
+          <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.7rem', color: '#1E40AF', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>
             {product.brand} · {CATEGORIES[product.category]}
           </div>
           <h1 style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '1.8rem', lineHeight: 1.2, marginBottom: '0.75rem', color: '#1F2937' }}>
@@ -80,8 +80,8 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
               </button>
             </div>
           ) : (
-            <div style={{ background: '#F9F0FF', border: '1px solid #DDD6FE', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem', fontSize: '0.88rem', color: '#7D3C98' }}>
-              Contact us for pricing: <a href="mailto:smarthome@smart-vision.co.za" style={{ color: '#7D3C98', fontWeight: 600 }}>smarthome@smart-vision.co.za</a>
+            <div style={{ background: '#EFF6FF', border: '1px solid #BFDBFE', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem', fontSize: '0.88rem', color: '#1E3A8A' }}>
+              Contact us for pricing: <a href="mailto:smarthome@smart-vision.co.za" style={{ color: '#1E3A8A', fontWeight: 600 }}>smarthome@smart-vision.co.za</a>
             </div>
           )}
 
@@ -90,7 +90,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
             <div style={{ fontSize: '0.8rem', color: '#9CA3AF', marginBottom: '0.5rem' }}>SKU: {product.sku}</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
               {product.tags.map((tag) => (
-                <span key={tag} style={{ background: '#F3E8FF', color: '#7D3C98', fontSize: '0.72rem', padding: '0.2rem 0.6rem', borderRadius: 100 }}>{tag}</span>
+                <span key={tag} style={{ background: '#EFF6FF', color: '#1E3A8A', fontSize: '0.72rem', padding: '0.2rem 0.6rem', borderRadius: 100 }}>{tag}</span>
               ))}
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
       </div>
 
       <div style={{ marginTop: '1.5rem' }}>
-        <Link href="/shop" style={{ color: '#9B59B6', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }}>← Back to Shop</Link>
+        <Link href="/shop" style={{ color: '#1E40AF', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }}>← Back to Shop</Link>
       </div>
     </div>
   );

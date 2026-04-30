@@ -31,10 +31,10 @@ function ShopContent() {
         {/* Sidebar filters */}
         <aside style={{ minWidth: 180, flexShrink: 0 }}>
           <div style={{ background: 'white', border: '1px solid #E5E7EB', borderRadius: 10, padding: '1rem' }}>
-            <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.68rem', color: '#9B59B6', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem' }}>Categories</div>
-            <button onClick={() => setSelectedCat('')} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.4rem 0.5rem', borderRadius: 6, background: selectedCat === '' ? '#F3E8FF' : 'transparent', color: selectedCat === '' ? '#7D3C98' : '#374151', fontWeight: selectedCat === '' ? 600 : 400, fontSize: '0.85rem', border: 'none', cursor: 'pointer', marginBottom: '0.25rem' }}>All Products</button>
+            <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.68rem', color: '#1E40AF', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem' }}>Categories</div>
+            <button onClick={() => setSelectedCat('')} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.4rem 0.5rem', borderRadius: 6, background: selectedCat === '' ? '#EFF6FF' : 'transparent', color: selectedCat === '' ? '#1E3A8A' : '#374151', fontWeight: selectedCat === '' ? 600 : 400, fontSize: '0.85rem', border: 'none', cursor: 'pointer', marginBottom: '0.25rem' }}>All Products</button>
             {(Object.entries(CATEGORIES) as [Category, string][]).map(([key, label]) => (
-              <button key={key} onClick={() => setSelectedCat(key)} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.4rem 0.5rem', borderRadius: 6, background: selectedCat === key ? '#F3E8FF' : 'transparent', color: selectedCat === key ? '#7D3C98' : '#374151', fontWeight: selectedCat === key ? 600 : 400, fontSize: '0.85rem', border: 'none', cursor: 'pointer', marginBottom: '0.25rem' }}>
+              <button key={key} onClick={() => setSelectedCat(key)} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.4rem 0.5rem', borderRadius: 6, background: selectedCat === key ? '#EFF6FF' : 'transparent', color: selectedCat === key ? '#1E3A8A' : '#374151', fontWeight: selectedCat === key ? 600 : 400, fontSize: '0.85rem', border: 'none', cursor: 'pointer', marginBottom: '0.25rem' }}>
                 {label}
               </button>
             ))}

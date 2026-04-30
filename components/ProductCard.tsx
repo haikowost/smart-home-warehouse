@@ -12,7 +12,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <div style={{ background: 'white', border: '1px solid #E5E7EB', borderRadius: 12, overflow: 'hidden', display: 'flex', flexDirection: 'column', transition: 'box-shadow 0.2s, transform 0.2s' }}
-      onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 24px rgba(155,89,182,0.15)'; (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)'; }}
+      onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 24px rgba(30,64,175,0.15)'; (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)'; }}
       onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = 'none'; (e.currentTarget as HTMLDivElement).style.transform = 'none'; }}>
       {/* Image */}
       <Link href={`/shop/${product.slug}`} style={{ display: 'block', textDecoration: 'none' }}>
@@ -30,7 +30,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
       {/* Info */}
       <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.65rem', color: '#9B59B6', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.35rem' }}>
+        <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.65rem', color: '#1E40AF', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.35rem' }}>
           {product.brand}
         </div>
         <Link href={`/shop/${product.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -42,7 +42,7 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.shortDesc}
         </p>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto' }}>
-          <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '1.25rem', color: product.price > 0 ? '#1F2937' : '#9B59B6' }}>
+          <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '1.25rem', color: product.price > 0 ? '#1F2937' : '#1E40AF' }}>
             {priceDisplay}
           </div>
           {product.inStock ? (

@@ -14,11 +14,11 @@ function OrderContent() {
       <p style={{ color: '#6B7280', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '0.5rem' }}>
         Thank you for your order. You&apos;ll receive a confirmation email shortly.
       </p>
-      <p style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.82rem', color: '#9B59B6', marginBottom: '2rem' }}>
+      <p style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.82rem', color: '#1E40AF', marginBottom: '2rem' }}>
         Reference: {ref}
       </p>
       <p style={{ fontSize: '0.88rem', color: '#6B7280', marginBottom: '2rem' }}>
-        Questions? Contact us at <a href="mailto:smarthome@smart-vision.co.za" style={{ color: '#9B59B6' }}>smarthome@smart-vision.co.za</a>
+        Questions? Contact us at <a href="mailto:smarthome@smart-vision.co.za" style={{ color: '#1E40AF' }}>smarthome@smart-vision.co.za</a>
       </p>
       <Link href="/shop" className="btn-primary">Continue Shopping →</Link>
     </div>

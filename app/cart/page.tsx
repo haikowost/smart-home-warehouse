@@ -68,7 +68,7 @@ export default function CartPage() {
             </div>
           </div>
           <Link href="/checkout" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>Proceed to Checkout →</Link>
-          <Link href="/shop" style={{ display: 'block', textAlign: 'center', marginTop: '0.75rem', fontSize: '0.83rem', color: '#9B59B6', textDecoration: 'none' }}>← Continue Shopping</Link>
+          <Link href="/shop" style={{ display: 'block', textAlign: 'center', marginTop: '0.75rem', fontSize: '0.83rem', color: '#1E40AF', textDecoration: 'none' }}>← Continue Shopping</Link>
         </div>
       </div>
     </div>

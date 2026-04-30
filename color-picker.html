@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHW Colour Options</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'IBM Plex Sans', sans-serif; background: #F3F4F6; padding: 2rem; }
+  h1 { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.6rem; color: #1F2937; margin-bottom: 0.25rem; }
+  .subtitle { font-size: 0.85rem; color: #6B7280; margin-bottom: 2.5rem; }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #9CA3AF;
+    margin-bottom: 0.75rem;
+  }
+
+  .row { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
+
+  .swatch {
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 180px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .swatch.current { border: 2px solid #D1D5DB; }
+  .swatch.option { cursor: default; }
+
+  .swatch-color {
+    height: 90px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0.6rem 0.75rem;
+  }
+  .swatch-hex {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.85);
+    background: rgba(0,0,0,0.2);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+  .swatch-hex.dark { color: rgba(0,0,0,0.5); background: rgba(0,0,0,0.08); }
+
+  .swatch-info { padding: 0.75rem; }
+  .swatch-letter {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #1F2937;
+    margin-bottom: 0.15rem;
+  }
+  .swatch-name { font-size: 0.8rem; font-weight: 600; color: #374151; margin-bottom: 0.15rem; }
+  .swatch-desc { font-size: 0.72rem; color: #6B7280; line-height: 1.45; }
+
+  /* Preview strip */
+  .preview {
+    margin-top: 0.5rem;
+    border-top: 1px solid #F3F4F6;
+    padding: 0.6rem 0.75rem;
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  .preview-btn {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.3rem 0.7rem;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    cursor: default;
+  }
+  .preview-tag {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+  .preview-link {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #E5E7EB;
+    margin-bottom: 2.5rem;
+  }
+
+  .badge-current {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    background: #FEF3C7;
+    color: #92400E;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<h1>Smart Home Warehouse — Primary Colour Options</h1>
+<p class="subtitle">Compare SHW options against existing division colours. Open this file in your browser.</p>
+
+<!-- ── CURRENT ── -->
+<div class="section-label">Current Smart Home Warehouse colour (Purple — to be replaced)</div>
+<div class="row">
+  <div class="swatch current">
+    <div class="swatch-color" style="background:#9B59B6;">
+      <span class="swatch-hex">#9B59B6</span>
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-name">Purple (Current) <span class="badge-current">REPLACING</span></div>
+      <div class="swatch-desc">Used throughout the store today. Being replaced.</div>
+    </div>
+    <div class="preview">
+      <button class="preview-btn" style="background:#9B59B6;">Add to Cart</button>
+      <span class="preview-tag" style="background:#F3E8FF;color:#7D3C98;">smart home</span>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ── SHW OPTIONS ── -->
+<div class="section-label">Smart Home Warehouse — new colour options (pick one)</div>
+<div class="row">
+
+  <!-- A -->
+  <div class="swatch option">
+    <div class="swatch-color" style="background:#1D4ED8;">
+      <span class="swatch-hex">#1D4ED8</span>
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-letter">A — Bright Navy</div>
+      <div class="swatch-desc">Deep, confident. Trusted & residential.</div>
+    </div>
+    <div class="preview">
+      <button class="preview-btn" style="background:#1D4ED8;">Add to Cart</button>
+      <span class="preview-tag" style="background:#EFF6FF;color:#1D4ED8;">smart home</span>
+    </div>
+  </div>
+
+  <!-- B -->
+  <div class="swatch option">
+    <div class="swatch-color" style="background:#2563EB;">
+      <span class="swatch-hex">#2563EB</span>
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-letter">B — Electric Cobalt</div>
+      <div class="swatch-desc">Vivid, energetic. Strong "smart tech" vibe.</div>
+    </div>
+    <div class="preview">
+      <button class="preview-btn" style="background:#2563EB;">Add to Cart</button>
+      <span class="preview-tag" style="background:#EFF6FF;color:#2563EB;">smart home</span>
+    </div>
+  </div>
+
+  <!-- C -->
+  <div class="swatch option">
+    <div class="swatch-color" style="background:#4338CA;">
+      <span class="swatch-hex">#4338CA</span>
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-letter">C — Indigo</div>
+      <div class="swatch-desc">Blue-purple bridge. Modern, warm, distinct.</div>
+    </div>
+    <div class="preview">
+      <button class="preview-btn" style="background:#4338CA;">Add to Cart</button>
+      <span class="preview-tag" style="background:#EEF2FF;color:#4338CA;">smart home</span>
+    </div>
+  </div>
+
+  <!-- D -->
+  <div class="swatch option">
+    <div class="swatch-color" style="background:#0369A1;">
+      <span class="swatch-hex">#0369A1</span>
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-letter">D — Sapphire</div>
+      <div class="swatch-desc">Deep, premium. Serious & authoritative.</div>
+    </div>
+    <div class="preview">
+      <button class="preview-btn" style="background:#0369A1;">Add to Cart</button>
+      <span class="preview-tag" style="background:#E0F2FE;color:#0369A1;">smart home</span>
+    </div>
+  </div>
+
+  <!-- E -->
+  <div class="swatch option">
+    <div class="swatch-color" style="background:#1E40AF;">
+      <span class="swatch-hex">#1E40AF</span>
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-letter">E — Royal Blue</div>
+      <div class="swatch-desc">Classic, rich. Works beautifully on dark bg.</div>
+    </div>
+    <div class="preview">
+      <button class="preview-btn" style="background:#1E40AF;">Add to Cart</button>
+      <span class="preview-tag" style="background:#EFF6FF;color:#1E40AF;">smart home</span>
+    </div>
+  </div>
+
+  <!-- F -->
+  <div class="swatch option">
+    <div class="swatch-color" style="background:#0284C7;">
+      <span class="swatch-hex">#0284C7</span>
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-letter">F — Horizon Blue</div>
+      <div class="swatch-desc">Sky-leaning, open. Lifestyle / residential feel.</div>
+    </div>
+    <div class="preview">
+      <button class="preview-btn" style="background:#0284C7;">Add to Cart</button>
+      <span class="preview-tag" style="background:#E0F2FE;color:#0284C7;">smart home</span>
+    </div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+<!-- ── OTHER DIVISIONS ── -->
+<div class="section-label">Other Smart Vision division colours — for comparison (do not clash)</div>
+<div class="row">
+
+  <div class="swatch">
+    <div class="swatch-color" style="background:#1E9AD6;">
+      <span class="swatch-hex">#1E9AD6</span>
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-name">SV Primary Blue</div>
+      <div class="swatch-desc">Main smart-vision.co.za brand colour.</div>
+    </div>
+    <div class="preview">
+      <button class="preview-btn" style="background:#1E9AD6;">Learn More</button>
+    </div>
+  </div>
+
+  <div class="swatch">
+    <div class="swatch-color" style="background:#1A2F4E;">
+      <span class="swatch-hex">#1A2F4E</span>
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-name">SV Navy (backgrounds)</div>
+      <div class="swatch-desc">Headers, dark sections across all SV sites.</div>
+    </div>
+    <div class="preview">
+      <button class="preview-btn" style="background:#1A2F4E;">Learn More</button>
+    </div>
+  </div>
+
+  <div class="swatch">
+    <div class="swatch-color" style="background:#00C8C8;">
+      <span class="swatch-hex">#00C8C8</span>
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-name">IoT — Teal</div>
+      <div class="swatch-desc">RAMAC / Sigfox IoT subdomain accent.</div>
+    </div>
+    <div class="preview">
+      <button class="preview-btn" style="background:#00C8C8; color:#1A2F4E;">Buy Now</button>
+    </div>
+  </div>
+
+  <div class="swatch">
+    <div class="swatch-color" style="background:#C0392B;">
+      <span class="swatch-hex">#C0392B</span>
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-name">SV Red (alerts)</div>
+      <div class="swatch-desc">Used for alerts and accents across SV brand.</div>
+    </div>
+    <div class="preview">
+      <button class="preview-btn" style="background:#C0392B;">Alert</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Dark background preview -->
+<div class="section-label">SHW options on dark hero background (as used in the store header)</div>
+<div style="background: linear-gradient(135deg, #1A1A2E 0%, #2D1B4E 100%); border-radius: 12px; padding: 1.5rem 1.5rem 1rem; margin-bottom: 2rem;">
+  <div style="color:#D1D5DB; font-size:0.8rem; font-family:'IBM Plex Sans',sans-serif; margin-bottom:1rem;">
+    How each colour looks on the store's dark hero gradient:
+  </div>
+  <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;">
+    <button style="font-family:'IBM Plex Sans',sans-serif;font-size:0.8rem;font-weight:600;padding:0.5rem 1.1rem;border-radius:7px;border:none;background:#9B59B6;color:white;cursor:default;">Current Purple</button>
+    <button style="font-family:'IBM Plex Sans',sans-serif;font-size:0.8rem;font-weight:600;padding:0.5rem 1.1rem;border-radius:7px;border:none;background:#1D4ED8;color:white;cursor:default;">A · Navy</button>
+    <button style="font-family:'IBM Plex Sans',sans-serif;font-size:0.8rem;font-weight:600;padding:0.5rem 1.1rem;border-radius:7px;border:none;background:#2563EB;color:white;cursor:default;">B · Cobalt</button>
+    <button style="font-family:'IBM Plex Sans',sans-serif;font-size:0.8rem;font-weight:600;padding:0.5rem 1.1rem;border-radius:7px;border:none;background:#4338CA;color:white;cursor:default;">C · Indigo</button>
+    <button style="font-family:'IBM Plex Sans',sans-serif;font-size:0.8rem;font-weight:600;padding:0.5rem 1.1rem;border-radius:7px;border:none;background:#0369A1;color:white;cursor:default;">D · Sapphire</button>
+    <button style="font-family:'IBM Plex Sans',sans-serif;font-size:0.8rem;font-weight:600;padding:0.5rem 1.1rem;border-radius:7px;border:none;background:#1E40AF;color:white;cursor:default;">E · Royal</button>
+    <button style="font-family:'IBM Plex Sans',sans-serif;font-size:0.8rem;font-weight:600;padding:0.5rem 1.1rem;border-radius:7px;border:none;background:#0284C7;color:white;cursor:default;">F · Horizon</button>
+  </div>
+  <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-top:0.75rem;">
+    <span style="font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:100px;background:rgba(155,89,182,0.2);color:#C084FC;">current tag</span>
+    <span style="font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:100px;background:rgba(29,78,216,0.2);color:#93C5FD;">A tag</span>
+    <span style="font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:100px;background:rgba(37,99,235,0.2);color:#93C5FD;">B tag</span>
+    <span style="font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:100px;background:rgba(67,56,202,0.2);color:#A5B4FC;">C tag</span>
+    <span style="font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:100px;background:rgba(3,105,161,0.2);color:#7DD3FC;">D tag</span>
+    <span style="font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:100px;background:rgba(30,64,175,0.2);color:#93C5FD;">E tag</span>
+    <span style="font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:100px;background:rgba(2,132,199,0.2);color:#7DD3FC;">F tag</span>
+  </div>
+</div>
+
+<p style="font-size:0.75rem;color:#9CA3AF;font-family:'IBM Plex Mono',monospace;">Tell Claude which letter you pick and the colour will be replaced throughout the entire store.</p>
+
+</body>
+</html>
