@@ -15,10 +15,17 @@ function Stars({ n = 4 }: { n?: number }) {
   );
 }
 
+const CATEGORY_ICONS: Record<string, string> = {
+  'power-control': '⚡', 'lighting': '💡', 'security': '🔒',
+  'environmental': '🌡', 'access-control': '🚪', 'remote-control': '📡',
+  'water-control': '💧', 'voice-assistants': '🎤', 'bundles': '📦',
+};
+
 export default function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
   const { has, toggle } = useWishlist();
   const [added, setAdded] = useState(false);
+  const [imgError, setImgError] = useState(false);
   const wished = has(product.id);
 
   function handleAdd(e: React.MouseEvent) {
@@ -39,14 +46,21 @@ export default function ProductCard({ product }: { product: Product }) {
       <div style={{ position: 'relative' }}>
         <Link href={`/shop/${product.slug}`} style={{ display: 'block', textDecoration: 'none' }}>
           <div style={{ background: '#F9FAFB', aspectRatio: '1', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', overflow: 'hidden' }}>
-            <img
-              src={product.images[0]}
-              alt={product.name}
-              style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', transition: 'transform 0.3s' }}
-              onError={e => { (e.target as HTMLImageElement).src = '/images/placeholder.png'; }}
-              onMouseEnter={e => { (e.target as HTMLImageElement).style.transform = 'scale(1.05)'; }}
-              onMouseLeave={e => { (e.target as HTMLImageElement).style.transform = 'scale(1)'; }}
-            />
+            {!imgError && product.images?.[0] ? (
+              <img
+                src={product.images[0]}
+                alt={product.name}
+                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', transition: 'transform 0.3s' }}
+                onError={() => setImgError(true)}
+                onMouseEnter={e => { (e.target as HTMLImageElement).style.transform = 'scale(1.05)'; }}
+                onMouseLeave={e => { (e.target as HTMLImageElement).style.transform = 'scale(1)'; }}
+              />
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem', color: '#9CA3AF' }}>
+                <span style={{ fontSize: '2.5rem' }}>{CATEGORY_ICONS[product.category] ?? '📦'}</span>
+                <span style={{ fontSize: '0.62rem', fontFamily: 'IBM Plex Mono, monospace', color: '#CBD5E1', textAlign: 'center' }}>{product.brand}</span>
+              </div>
+            )}
           </div>
         </Link>
 
