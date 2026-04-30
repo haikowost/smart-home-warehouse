@@ -107,7 +107,7 @@ export default function AdminOrders() {
                     <td style={{ padding: '0.6rem 0.9rem', width: 32 }}>
                       <button
                         onClick={() => setExpanded(expanded === order.id ? null : order.id)}
-                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748B', fontSize: '0.75rem', padding: '0.2rem 0.4rem', borderRadius: 4, background: '#F1F5F9' }}>
+                        style={{ background: '#F1F5F9', border: 'none', cursor: 'pointer', color: '#64748B', fontSize: '0.75rem', padding: '0.2rem 0.4rem', borderRadius: 4 }}>
                         {expanded === order.id ? '▲' : '▼'}
                       </button>
                     </td>
