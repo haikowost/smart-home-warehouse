@@ -4,7 +4,11 @@ export async function POST(request: NextRequest) {
   const { password } = await request.json() as { password: string };
   const adminPassword = process.env.ADMIN_PASSWORD;
 
-  if (!adminPassword || password !== adminPassword) {
+  if (!adminPassword) {
+    return NextResponse.json({ error: 'ADMIN_PASSWORD not set in environment variables. Add it in Vercel → Project Settings → Environment Variables, then redeploy.' }, { status: 503 });
+  }
+
+  if (password !== adminPassword) {
     return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
   }
 
