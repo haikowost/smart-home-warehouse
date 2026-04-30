@@ -5,7 +5,7 @@
   --shw-dk: #1E3A8A;
   --shw-lt: #EFF6FF;
   --navy: #1A1A2E;
-  --bg: #F8F9FA;
+  --bg: #F3F4F6;
   --border: #E5E7EB;
   --txt: #1F2937;
   --muted: #6B7280;
@@ -28,7 +28,7 @@ body {
   font-size: 0.9rem;
   border: none;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background 0.2s, transform 0.15s;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -52,3 +52,35 @@ body {
   text-decoration: none;
 }
 .btn-outline:hover { background: var(--shw); color: white; }
+
+.btn-outline-white {
+  background: transparent;
+  color: white;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 2px solid rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.btn-outline-white:hover { background: rgba(255,255,255,0.15); border-color: white; }
+
+/* Product card hover handled inline; this provides the base */
+.product-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.product-card:hover {
+  box-shadow: 0 8px 24px rgba(30,64,175,0.12);
+  transform: translateY(-2px);
+}

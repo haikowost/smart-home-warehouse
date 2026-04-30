@@ -677,3 +677,7 @@ export function searchProducts(query: string): Product[] {
       p.tags.some((t) => t.includes(q))
   );
 }
+
+export function getProductsByIds(ids: string[]): Product[] {
+  return products.filter((p) => ids.includes(p.id));
+}
