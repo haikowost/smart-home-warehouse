@@ -40,7 +40,18 @@ export default function CheckoutPage() {
     const res = await fetch('/api/payfast/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ form, paymentId, amount: orderTotal.toFixed(2), itemName }),
+      body: JSON.stringify({
+        form,
+        paymentId,
+        amount: orderTotal.toFixed(2),
+        itemName,
+        items: items.map(({ product, quantity }) => ({
+          product_id: product.id,
+          product_name: product.name,
+          quantity,
+          unit_price: product.price,
+        })),
+      }),
     });
 
     const { url, fields } = await res.json();
