@@ -59,6 +59,27 @@ const CatIcons: Record<string, () => JSX.Element> = {
 
 const NAV_CATS: Category[] = ['power-control', 'lighting', 'security', 'environmental', 'voice-assistants', 'access-control'];
 
+// Logo: tries the real PNG, falls back to inline SVG + wordmark
+function LogoImage() {
+  const [imgOk, setImgOk] = useState(true);
+  return imgOk ? (
+    <img
+      src="/images/shwh-logo.png"
+      alt="Smart Home Warehouse"
+      style={{ height: 44, width: 'auto', maxWidth: 180, objectFit: 'contain' }}
+      onError={() => setImgOk(false)}
+    />
+  ) : (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+      <SHWLogo />
+      <div style={{ lineHeight: 1.15 }}>
+        <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '0.95rem', color: '#1A1A2E' }}>Smart Home</div>
+        <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '0.95rem', color: '#1E40AF' }}>Warehouse</div>
+      </div>
+    </div>
+  );
+}
+
 // Inline SVG house logo — always renders, no file dependency
 function SHWLogo() {
   return (
@@ -111,11 +132,7 @@ export default function Header() {
 
         {/* Logo */}
         <Link href="/" style={{ flexShrink: 0, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
-          <SHWLogo />
-          <div style={{ lineHeight: 1.15 }}>
-            <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '0.95rem', color: '#1A1A2E', letterSpacing: '0.02em' }}>Smart Home</div>
-            <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '0.95rem', color: '#1E40AF', letterSpacing: '0.02em' }}>Warehouse</div>
-          </div>
+          <LogoImage />
         </Link>
 
         {/* Search */}
