@@ -1,11 +1,11 @@
 'use client';
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import { getFeaturedProducts, CATEGORIES, Category } from '@/lib/products';
 
 // Apple-style app icon tiles per category
-const CAT_TILES: Array<{ key: Category; gradient: string; icon: JSX.Element }> = [
+const CAT_TILES: Array<{ key: Category; gradient: string; icon: React.ReactElement }> = [
   {
     key: 'power-control',
     gradient: 'linear-gradient(145deg, #F7971E, #FFD200)',
