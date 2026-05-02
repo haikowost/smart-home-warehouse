@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCart } from './CartProvider';
 import { useWishlist } from './WishlistProvider';
+import { useAuth } from './AuthProvider';
 import { CATEGORIES, Category } from '@/lib/products';
 
 // ── SVG icon primitives ────────────────────────────────────────────────────
@@ -43,50 +44,45 @@ function IconChevron() {
     </svg>
   );
 }
-
-// Category SVG icons
-const CatIcons: Record<string, () => React.ReactElement> = {
-  'power-control':    () => <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>,
-  'lighting':         () => <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>,
-  'security':         () => <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
-  'environmental':    () => <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>,
-  'access-control':   () => <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>,
-  'remote-control':   () => <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="8" y="2" width="8" height="20" rx="4"/><circle cx="12" cy="8" r="1" fill="currentColor"/><line x1="10" y1="13" x2="14" y2="13"/><line x1="10" y1="16" x2="14" y2="16"/></svg>,
-  'water-control':    () => <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>,
-  'voice-assistants': () => <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>,
-  'bundles':          () => <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>,
-};
-
-const NAV_CATS: Category[] = ['power-control', 'lighting', 'security', 'environmental', 'voice-assistants', 'access-control'];
-
-// Logo: tries the real PNG, falls back to inline SVG + wordmark
-function LogoImage() {
-  const [imgOk, setImgOk] = useState(true);
-  return imgOk ? (
-    <img
-      src="/images/shwh-logo.png"
-      alt="Smart Home Warehouse"
-      style={{ height: 44, width: 'auto', maxWidth: 180, objectFit: 'contain' }}
-      onError={() => setImgOk(false)}
-    />
-  ) : (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
-      <SHWLogo />
-      <div style={{ lineHeight: 1.15 }}>
-        <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '0.95rem', color: '#1A1A2E' }}>Smart Home</div>
-        <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '0.95rem', color: '#1E40AF' }}>Warehouse</div>
-      </div>
-    </div>
+function IconUser() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+      <circle cx="12" cy="7" r="4"/>
+    </svg>
   );
 }
 
-// Inline SVG house logo — always renders, no file dependency
+// Category SVG icons — used in dropdown and nav bar
+const CatIcons: Record<string, () => React.ReactElement> = {
+  'power-control':    () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>,
+  'lighting':         () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>,
+  'security':         () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+  'environmental':    () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>,
+  'access-control':   () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>,
+  'remote-control':   () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="8" y="2" width="8" height="20" rx="4"/><circle cx="12" cy="8" r="1" fill="currentColor"/><line x1="10" y1="13" x2="14" y2="13"/><line x1="10" y1="16" x2="14" y2="16"/></svg>,
+  'water-control':    () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>,
+  'voice-assistants': () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>,
+  'bundles':          () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>,
+};
+
+// Dropdown icons are slightly larger
+const CatIconsLg: Record<string, () => React.ReactElement> = Object.fromEntries(
+  Object.entries(CatIcons).map(([k, Comp]) => [k, () => {
+    const el = Comp();
+    return React.cloneElement(el, { width: 20, height: 20 } as React.SVGProps<SVGSVGElement>);
+  }])
+);
+
+const NAV_CATS: Category[] = ['power-control', 'lighting', 'security', 'environmental', 'voice-assistants', 'access-control'];
+
+// Inline SVG house logo — no file dependency, always renders
 function SHWLogo() {
   return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="36" height="36" rx="8" fill="#1E40AF"/>
-      <path d="M18 8L7 17h3v11h7v-7h2v7h7V17h3L18 8z" fill="white"/>
-      <circle cx="18" cy="17" r="2.5" fill="#93C5FD"/>
+    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="42" height="42" rx="10" fill="#1E40AF"/>
+      <path d="M21 10L8 20h4v13h8v-8h2v8h8V20h4L21 10z" fill="white"/>
+      <circle cx="21" cy="20" r="3" fill="#93C5FD"/>
     </svg>
   );
 }
@@ -94,11 +90,14 @@ function SHWLogo() {
 export default function Header() {
   const { count } = useCart();
   const { count: wishCount } = useWishlist();
+  const { user, signOut } = useAuth();
   const [search, setSearch] = useState('');
   const [catOpen, setCatOpen] = useState(false);
+  const [acctOpen, setAcctOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
   const catRef = useRef<HTMLDivElement>(null);
+  const acctRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
@@ -109,6 +108,7 @@ export default function Header() {
   useEffect(() => {
     const onClickOutside = (e: MouseEvent) => {
       if (catRef.current && !catRef.current.contains(e.target as Node)) setCatOpen(false);
+      if (acctRef.current && !acctRef.current.contains(e.target as Node)) setAcctOpen(false);
     };
     document.addEventListener('mousedown', onClickOutside);
     return () => document.removeEventListener('mousedown', onClickOutside);
@@ -124,15 +124,19 @@ export default function Header() {
 
       {/* Announcement bar */}
       <div style={{ background: '#1E40AF', color: 'white', textAlign: 'center', padding: '0.28rem', fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.7rem', letterSpacing: '0.05em' }}>
-        Free delivery on orders over R500 &nbsp;·&nbsp; SA's curated smart home store &nbsp;·&nbsp; Tuya · TP-Link TAPO · Google Nest
+        Free delivery on orders over R500 &nbsp;·&nbsp; SA&apos;s curated smart home store &nbsp;·&nbsp; Tuya · TP-Link TAPO · Google Nest
       </div>
 
       {/* Main row */}
       <div style={{ maxWidth: 1300, margin: '0 auto', padding: '0.55rem 1.5rem', display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
 
-        {/* Logo */}
-        <Link href="/" style={{ flexShrink: 0, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
-          <LogoImage />
+        {/* Logo — always inline SVG, no image file dependency */}
+        <Link href="/" style={{ flexShrink: 0, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <SHWLogo />
+          <div className="hidden sm:block">
+            <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '1.05rem', lineHeight: 1.1, color: '#1A1A2E' }}>Smart Home</div>
+            <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '1.05rem', lineHeight: 1.1, color: '#1E40AF' }}>Warehouse</div>
+          </div>
         </Link>
 
         {/* Search */}
@@ -159,7 +163,59 @@ export default function Header() {
         </form>
 
         {/* Actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', flexShrink: 0 }}>
+
+          {/* Account */}
+          <div ref={acctRef} style={{ position: 'relative' }}>
+            <button
+              onClick={() => setAcctOpen(v => !v)}
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'none', border: 'none', cursor: 'pointer', padding: '0.35rem 0.6rem', borderRadius: 8, gap: 2, color: user ? '#1E40AF' : '#6B7280' }}
+            >
+              <IconUser />
+              <span style={{ fontSize: '0.6rem', fontFamily: 'IBM Plex Mono, monospace', textTransform: 'uppercase', color: user ? '#1E40AF' : '#9CA3AF' }}>
+                {user ? 'Account' : 'Sign In'}
+              </span>
+            </button>
+            {acctOpen && (
+              <div style={{ position: 'absolute', top: '100%', right: 0, zIndex: 200, background: 'white', border: '1px solid #E5E7EB', borderRadius: 10, boxShadow: '0 12px 40px rgba(0,0,0,0.14)', width: 200, overflow: 'hidden', marginTop: 4 }}>
+                {user ? (
+                  <>
+                    <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid #F3F4F6', fontSize: '0.78rem', color: '#6B7280' }}>
+                      {user.email}
+                    </div>
+                    <Link href="/account" onClick={() => setAcctOpen(false)} style={{ display: 'block', padding: '0.65rem 1rem', textDecoration: 'none', color: '#374151', fontSize: '0.87rem' }}
+                      onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = '#EFF6FF'}
+                      onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = ''}>
+                      My Account
+                    </Link>
+                    <Link href="/account/orders" onClick={() => setAcctOpen(false)} style={{ display: 'block', padding: '0.65rem 1rem', textDecoration: 'none', color: '#374151', fontSize: '0.87rem' }}
+                      onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = '#EFF6FF'}
+                      onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = ''}>
+                      My Orders
+                    </Link>
+                    <button onClick={() => { signOut(); setAcctOpen(false); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.65rem 1rem', background: 'none', border: 'none', cursor: 'pointer', color: '#EF4444', fontSize: '0.87rem', borderTop: '1px solid #F3F4F6' }}
+                      onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.background = '#FEF2F2'}
+                      onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.background = ''}>
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/login" onClick={() => setAcctOpen(false)} style={{ display: 'block', padding: '0.75rem 1rem', textDecoration: 'none', color: '#374151', fontSize: '0.87rem', fontWeight: 600 }}
+                      onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = '#EFF6FF'}
+                      onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = ''}>
+                      Sign In
+                    </Link>
+                    <Link href="/register" onClick={() => setAcctOpen(false)} style={{ display: 'block', padding: '0.75rem 1rem', textDecoration: 'none', color: '#1E40AF', fontSize: '0.87rem', fontWeight: 600, borderTop: '1px solid #F3F4F6' }}
+                      onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = '#EFF6FF'}
+                      onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = ''}>
+                      Create Account →
+                    </Link>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
 
           {/* Wishlist */}
           <Link href="/wishlist" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textDecoration: 'none', padding: '0.35rem 0.6rem', borderRadius: 8, position: 'relative', gap: 2 }}>
@@ -217,17 +273,17 @@ export default function Header() {
               }}>
                 <Link href="/shop" onClick={() => setCatOpen(false)}
                   style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 1rem', textDecoration: 'none', color: '#1F2937', fontWeight: 700, fontSize: '0.88rem', borderBottom: '2px solid #F3F4F6' }}>
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#1E40AF" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1E40AF" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                   All Products
                 </Link>
                 {(Object.entries(CATEGORIES) as [Category, string][]).map(([key, label]) => {
-                  const Icon = CatIcons[key];
+                  const Icon = CatIconsLg[key];
                   return (
                     <Link key={key} href={`/shop?cat=${key}`} onClick={() => setCatOpen(false)}
                       style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.55rem 1rem', textDecoration: 'none', color: '#374151', fontSize: '0.87rem', transition: 'background 0.1s, color 0.1s' }}
                       onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = '#EFF6FF'; (e.currentTarget as HTMLAnchorElement).style.color = '#1E40AF'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = ''; (e.currentTarget as HTMLAnchorElement).style.color = '#374151'; }}>
-                      <span style={{ color: '#1E40AF', flexShrink: 0 }}>{Icon && <Icon />}</span>
+                      <span style={{ color: '#1E40AF', flexShrink: 0, display: 'flex' }}>{Icon && <Icon />}</span>
                       {label}
                     </Link>
                   );
@@ -239,21 +295,25 @@ export default function Header() {
           {/* Divider */}
           <div style={{ width: 1, background: 'rgba(255,255,255,0.1)', margin: '0.5rem 0', flexShrink: 0 }} />
 
-          {/* Quick category links */}
-          {NAV_CATS.map(key => (
-            <Link key={key} href={`/shop?cat=${key}`}
-              style={{ display: 'flex', alignItems: 'center', color: '#CBD5E1', textDecoration: 'none', fontSize: '0.82rem', padding: '0.62rem 0.85rem', whiteSpace: 'nowrap', transition: 'color 0.15s', fontFamily: 'IBM Plex Sans, sans-serif' }}
-              onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = 'white'}
-              onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#CBD5E1'}>
-              {CATEGORIES[key]}
-            </Link>
-          ))}
+          {/* Quick category links with icons */}
+          {NAV_CATS.map(key => {
+            const Icon = CatIcons[key];
+            return (
+              <Link key={key} href={`/shop?cat=${key}`}
+                style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#CBD5E1', textDecoration: 'none', fontSize: '0.82rem', padding: '0.62rem 0.85rem', whiteSpace: 'nowrap', transition: 'color 0.15s', fontFamily: 'IBM Plex Sans, sans-serif' }}
+                onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = 'white'}
+                onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#CBD5E1'}>
+                {Icon && <span style={{ display: 'flex', opacity: 0.8 }}><Icon /></span>}
+                <span className="hidden lg:inline">{CATEGORIES[key]}</span>
+              </Link>
+            );
+          })}
 
           {/* Bundles — highlighted */}
           <Link href="/shop?cat=bundles"
             style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#FCD34D', textDecoration: 'none', fontSize: '0.82rem', padding: '0.62rem 0.85rem', fontWeight: 700, marginLeft: 'auto', whiteSpace: 'nowrap', fontFamily: 'IBM Plex Sans, sans-serif' }}>
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-            Bundles & Deals
+            <span className="hidden sm:inline">Bundles &amp; Deals</span>
           </Link>
         </div>
       </div>

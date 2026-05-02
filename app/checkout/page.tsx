@@ -2,18 +2,24 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/components/CartProvider';
+import { useAuth } from '@/components/AuthProvider';
 
 export default function CheckoutPage() {
   const { items, total, clear } = useCart();
+  const { user } = useAuth();
   const shipping = total >= 500 ? 0 : 99;
   const orderTotal = total + shipping;
 
   const [form, setForm] = useState({
-    firstName: '', lastName: '', email: '', phone: '',
+    firstName: user?.user_metadata?.first_name ?? '',
+    lastName: user?.user_metadata?.last_name ?? '',
+    email: user?.email ?? '',
+    phone: user?.user_metadata?.phone ?? '',
     address: '', suburb: '', city: '', province: '', postalCode: '',
   });
 
   const [submitting, setSubmitting] = useState(false);
+  const [checkoutError, setCheckoutError] = useState('');
 
   if (items.length === 0) {
     return (
@@ -37,6 +43,7 @@ export default function CheckoutPage() {
     const itemName = `Smart Home Warehouse Order ${paymentId}`;
 
     // Build PayFast form and submit
+    setCheckoutError('');
     const res = await fetch('/api/payfast/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -54,13 +61,25 @@ export default function CheckoutPage() {
       }),
     });
 
-    const { url, fields } = await res.json();
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      setCheckoutError(data?.error ?? `Payment setup failed (${res.status}). Please try again or contact support.`);
+      setSubmitting(false);
+      return;
+    }
+
+    const data = await res.json();
+    if (!data?.url || !data?.fields) {
+      setCheckoutError('Payment configuration error. Please contact support.');
+      setSubmitting(false);
+      return;
+    }
 
     // Create and submit form to PayFast
     const pf = document.createElement('form');
     pf.method = 'POST';
-    pf.action = url;
-    Object.entries(fields as Record<string, string>).forEach(([k, v]) => {
+    pf.action = data.url;
+    Object.entries(data.fields as Record<string, string>).forEach(([k, v]) => {
       const input = document.createElement('input');
       input.type = 'hidden';
       input.name = k;
@@ -146,6 +165,11 @@ export default function CheckoutPage() {
                 <span>R{orderTotal.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}</span>
               </div>
             </div>
+            {checkoutError && (
+              <div style={{ background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 8, padding: '0.75rem', fontSize: '0.83rem', color: '#DC2626', marginBottom: '0.75rem' }}>
+                {checkoutError}
+              </div>
+            )}
             <button type="submit" className="btn-primary" disabled={submitting} style={{ width: '100%', justifyContent: 'center', opacity: submitting ? 0.7 : 1 }}>
               {submitting ? 'Redirecting to PayFast...' : `Pay R${orderTotal.toLocaleString('en-ZA', { minimumFractionDigits: 2 })} →`}
             </button>

@@ -1,12 +1,10 @@
 'use client';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 export default function AdminLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -18,15 +16,16 @@ export default function AdminLogin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password }),
       });
+      const data = await res.json();
       if (res.ok) {
-        router.push('/admin');
-        router.refresh();
+        // Hard navigation ensures cookie is sent on the next request
+        window.location.href = '/admin';
       } else {
-        setError('Invalid password');
+        setError(data?.error ?? 'Login failed — try again.');
+        setLoading(false);
       }
     } catch {
-      setError('Something went wrong. Try again.');
-    } finally {
+      setError('Network error — try again.');
       setLoading(false);
     }
   }
@@ -55,9 +54,9 @@ export default function AdminLogin() {
             onBlur={e => { (e.target as HTMLInputElement).style.borderColor = '#E5E7EB'; }}
           />
           {error && (
-            <p style={{ color: '#EF4444', fontSize: '0.82rem', marginBottom: '0.75rem', background: '#FEF2F2', padding: '0.5rem 0.75rem', borderRadius: 6 }}>
+            <div style={{ color: '#EF4444', fontSize: '0.82rem', marginBottom: '0.75rem', background: '#FEF2F2', padding: '0.6rem 0.75rem', borderRadius: 6 }}>
               {error}
-            </p>
+            </div>
           )}
           <button
             type="submit"
@@ -68,9 +67,11 @@ export default function AdminLogin() {
           </button>
         </form>
 
-        <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.72rem', color: '#D1D5DB' }}>
-          Set ADMIN_PASSWORD in Vercel environment variables
-        </p>
+        <div style={{ marginTop: '1.5rem', padding: '0.75rem', background: '#F8FAFC', borderRadius: 8, fontSize: '0.72rem', color: '#64748B' }}>
+          <strong>Troubleshooting:</strong> Visit{' '}
+          <a href="/api/admin/ping" target="_blank" rel="noreferrer" style={{ color: '#1E40AF' }}>/api/admin/ping</a>
+          {' '}to verify your ADMIN_PASSWORD env var is set in Vercel.
+        </div>
       </div>
     </div>
   );

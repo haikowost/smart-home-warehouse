@@ -12,7 +12,7 @@ export async function middleware(request: NextRequest) {
   }
 
   const session = request.cookies.get('shw-admin-session')?.value;
-  const adminPass = process.env.ADMIN_PASSWORD;
+  const adminPass = process.env.ADMIN_PASSWORD?.trim();
 
   if (!session || !adminPass) {
     return NextResponse.redirect(new URL('/admin/login', request.url));
