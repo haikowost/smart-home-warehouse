@@ -55,6 +55,7 @@ function IconUser() {
 
 // Category SVG icons — used in dropdown and nav bar
 const CatIcons: Record<string, () => React.ReactElement> = {
+  'cameras':          () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>,
   'power-control':    () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>,
   'lighting':         () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>,
   'security':         () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
@@ -75,22 +76,11 @@ const CatIconsLg: Record<string, () => React.ReactElement> = Object.fromEntries(
   }])
 );
 
-const NAV_CATS: Category[] = ['power-control', 'lighting', 'security', 'networking', 'environmental', 'voice-assistants'];
+const NAV_CATS: Category[] = ['cameras', 'power-control', 'lighting', 'security', 'networking', 'environmental'];
 
-// Inline SVG logo — smart home + connected/WiFi symbol
 function SHWLogo() {
   return (
-    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="42" height="42" rx="10" fill="#0F172A"/>
-      {/* House silhouette */}
-      <path d="M21 8L7 20h4v14h7v-9h6v9h7V20h4L21 8z" fill="#3B82F6"/>
-      {/* WiFi dot */}
-      <circle cx="21" cy="27" r="1.8" fill="white"/>
-      {/* WiFi arc 1 */}
-      <path d="M17.4 23.2a5.2 5.2 0 0 1 7.2 0" stroke="white" strokeWidth="1.7" strokeLinecap="round" fill="none"/>
-      {/* WiFi arc 2 — dimmer */}
-      <path d="M14.6 20.6a9.3 9.3 0 0 1 12.8 0" stroke="white" strokeWidth="1.3" strokeLinecap="round" fill="none" opacity="0.45"/>
-    </svg>
+    <img src="/logo.png" alt="Smart Home Warehouse" width={48} height={48} style={{ objectFit: 'contain', display: 'block' }} />
   );
 }
 
@@ -250,7 +240,7 @@ export default function Header() {
 
       {/* Category nav bar */}
       <div style={{ background: '#1A1A2E', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div style={{ maxWidth: 1300, margin: '0 auto', padding: '0 1.5rem', display: 'flex', alignItems: 'stretch', overflowX: 'auto' }}>
+        <div style={{ maxWidth: 1300, margin: '0 auto', padding: '0 1.5rem', display: 'flex', alignItems: 'stretch' }}>
 
           {/* All Categories dropdown */}
           <div ref={catRef} style={{ position: 'relative', flexShrink: 0 }}>
@@ -299,6 +289,8 @@ export default function Header() {
             )}
           </div>
 
+          {/* Scrollable links — separate from dropdown to prevent overflow clipping */}
+          <div style={{ display: 'flex', alignItems: 'stretch', overflowX: 'auto', flex: 1 }}>
           {/* Divider */}
           <div style={{ width: 1, background: 'rgba(255,255,255,0.1)', margin: '0.5rem 0', flexShrink: 0 }} />
 
@@ -322,6 +314,7 @@ export default function Header() {
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
             <span className="hidden sm:inline">Bundles &amp; Deals</span>
           </Link>
+          </div>
         </div>
       </div>
     </header>

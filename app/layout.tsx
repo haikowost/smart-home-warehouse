@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Smart Home Warehouse | Curated Smart Home Products — South Africa",
   description: "South Africa's curated smart home store. Tuya, Smartlife, TAPO, Home Assistant compatible. Free delivery over R500.",
+  icons: { icon: '/logo.png', apple: '/logo.png' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
