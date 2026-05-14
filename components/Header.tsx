@@ -63,6 +63,7 @@ const CatIcons: Record<string, () => React.ReactElement> = {
   'remote-control':   () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="8" y="2" width="8" height="20" rx="4"/><circle cx="12" cy="8" r="1" fill="currentColor"/><line x1="10" y1="13" x2="14" y2="13"/><line x1="10" y1="16" x2="14" y2="16"/></svg>,
   'water-control':    () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>,
   'voice-assistants': () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>,
+  'networking':       () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>,
   'bundles':          () => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>,
 };
 
@@ -74,15 +75,21 @@ const CatIconsLg: Record<string, () => React.ReactElement> = Object.fromEntries(
   }])
 );
 
-const NAV_CATS: Category[] = ['power-control', 'lighting', 'security', 'environmental', 'voice-assistants', 'access-control'];
+const NAV_CATS: Category[] = ['power-control', 'lighting', 'security', 'networking', 'environmental', 'voice-assistants'];
 
-// Inline SVG house logo — no file dependency, always renders
+// Inline SVG logo — smart home + connected/WiFi symbol
 function SHWLogo() {
   return (
     <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="42" height="42" rx="10" fill="#1E40AF"/>
-      <path d="M21 10L8 20h4v13h8v-8h2v8h8V20h4L21 10z" fill="white"/>
-      <circle cx="21" cy="20" r="3" fill="#93C5FD"/>
+      <rect width="42" height="42" rx="10" fill="#0F172A"/>
+      {/* House silhouette */}
+      <path d="M21 8L7 20h4v14h7v-9h6v9h7V20h4L21 8z" fill="#3B82F6"/>
+      {/* WiFi dot */}
+      <circle cx="21" cy="27" r="1.8" fill="white"/>
+      {/* WiFi arc 1 */}
+      <path d="M17.4 23.2a5.2 5.2 0 0 1 7.2 0" stroke="white" strokeWidth="1.7" strokeLinecap="round" fill="none"/>
+      {/* WiFi arc 2 — dimmer */}
+      <path d="M14.6 20.6a9.3 9.3 0 0 1 12.8 0" stroke="white" strokeWidth="1.3" strokeLinecap="round" fill="none" opacity="0.45"/>
     </svg>
   );
 }

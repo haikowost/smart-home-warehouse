@@ -1,15 +1,22 @@
 'use client';
-import { useState, useMemo, Suspense } from 'react';
+import React, { useState, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 import { products, CATEGORIES, Category } from '@/lib/products';
 
 type SortKey = 'featured' | 'price-asc' | 'price-desc' | 'name-az';
 
-const CAT_ICONS: Record<string, string> = {
-  'power-control': '⚡', 'lighting': '💡', 'security': '🔒',
-  'environmental': '🌡️', 'access-control': '🚪', 'remote-control': '📱',
-  'water-control': '💧', 'voice-assistants': '🎙️', 'bundles': '📦',
+const CAT_ICONS: Record<string, React.ReactElement> = {
+  'power-control':    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>,
+  'lighting':         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>,
+  'security':         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+  'environmental':    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>,
+  'access-control':   <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>,
+  'remote-control':   <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="8" y="2" width="8" height="20" rx="4"/><circle cx="12" cy="8" r="1" fill="currentColor"/><line x1="10" y1="13" x2="14" y2="13"/><line x1="10" y1="16" x2="14" y2="16"/></svg>,
+  'water-control':    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>,
+  'voice-assistants': <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>,
+  'networking':       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>,
+  'bundles':          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>,
 };
 
 function ShopContent() {
@@ -95,11 +102,12 @@ function ShopContent() {
           <div style={{ background: 'white', border: '1px solid #E5E7EB', borderRadius: 10, padding: '1rem', marginBottom: '0.75rem' }}>
             <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.63rem', color: '#1E40AF', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.6rem' }}>Categories</div>
             <button onClick={() => setSelectedCat('')} style={catBtnStyle(selectedCat === '')}>
-              🏪 All Products
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+              All Products
             </button>
             {(Object.entries(CATEGORIES) as [Category, string][]).map(([key, label]) => (
               <button key={key} onClick={() => setSelectedCat(key)} style={catBtnStyle(selectedCat === key)}>
-                <span style={{ fontSize: '0.9rem' }}>{CAT_ICONS[key]}</span>
+                <span style={{ display: 'flex', flexShrink: 0 }}>{CAT_ICONS[key]}</span>
                 {label}
               </button>
             ))}
