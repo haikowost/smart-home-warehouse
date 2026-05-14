@@ -656,7 +656,6 @@ export const products: Product[] = [
     tags: ['power bank', 'load shedding', 'fast charge', 'pd', '20w'],
     inStock: true,
   },
-];
 
   // ─── TP-Link TAPO Products ─────────────────────────────────────────────────
 
