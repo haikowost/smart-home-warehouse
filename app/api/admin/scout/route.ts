@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
   }));
 
   const { data, error } = await sb
-    .table('products')
+    .from('products')
     .upsert(rows, { onConflict: 'slug' })
     .select('id, slug');
 
