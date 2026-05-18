@@ -45,7 +45,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         <span style={{ color: '#374151' }}>{product.name}</span>
       </nav>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2.5rem', alignItems: 'start' }}>
+      <div className="product-detail-grid">
 
         {/* ── LEFT: Image gallery ── */}
         <div>
@@ -288,6 +288,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
           <div onClick={e => e.stopPropagation()} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
             {product.images.length > 1 && (
               <button
+                className="lightbox-nav-prev"
                 onClick={() => setActiveImg(i => (i - 1 + product.images.length) % product.images.length)}
                 style={{ position: 'absolute', left: -56, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.15)', border: 'none', color: 'white', borderRadius: '50%', width: 40, height: 40, cursor: 'pointer', fontSize: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
               >‹</button>
@@ -300,6 +301,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
             {product.images.length > 1 && (
               <>
                 <button
+                  className="lightbox-nav-next"
                   onClick={() => setActiveImg(i => (i + 1) % product.images.length)}
                   style={{ position: 'absolute', right: -56, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.15)', border: 'none', color: 'white', borderRadius: '50%', width: 40, height: 40, cursor: 'pointer', fontSize: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >›</button>

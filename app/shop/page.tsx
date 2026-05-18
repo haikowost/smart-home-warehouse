@@ -83,10 +83,11 @@ function ShopContent() {
         )}
       </div>
 
-      <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
+      <div className="shw-shop-layout">
 
         {/* ── SIDEBAR ── */}
-        <aside style={{ width: 210, flexShrink: 0 }}>
+        <aside className="shw-sidebar">
+          <div className="shw-sidebar-inner">
           {/* Search in sidebar */}
           <div style={{ background: 'white', border: '1px solid #E5E7EB', borderRadius: 10, padding: '1rem', marginBottom: '0.75rem' }}>
             <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.63rem', color: '#1E40AF', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.6rem' }}>Search</div>
@@ -127,6 +128,7 @@ function ShopContent() {
               In stock only
             </label>
           </div>
+        </div>
         </aside>
 
         {/* ── PRODUCT GRID ── */}
@@ -183,7 +185,7 @@ function ShopContent() {
               <p style={{ color: '#6B7280', fontSize: '0.9rem' }}>No products found. Try adjusting your search or filters.</p>
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1.1rem' }}>
+            <div className="shw-product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1.1rem' }}>
               {filtered.map(product => (
                 <ProductCard key={product.id} product={product} />
               ))}

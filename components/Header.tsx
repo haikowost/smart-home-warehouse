@@ -125,7 +125,7 @@ export default function Header() {
       </div>
 
       {/* Main row */}
-      <div style={{ maxWidth: 1300, margin: '0 auto', padding: '0.55rem 1.5rem', display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+      <div className="shw-header-main">
 
         {/* Logo — always inline SVG, no image file dependency */}
         <Link href="/" style={{ flexShrink: 0, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
@@ -137,7 +137,7 @@ export default function Header() {
         </Link>
 
         {/* Search */}
-        <form onSubmit={handleSearch} style={{ flex: 1, display: 'flex', maxWidth: 720 }}>
+        <form onSubmit={handleSearch} className="shw-search-form">
           <input
             value={search}
             onChange={e => setSearch(e.target.value)}

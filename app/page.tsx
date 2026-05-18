@@ -17,6 +17,11 @@ const CAT_TILES: Array<{ key: Category; gradient: string; icon: React.ReactEleme
     icon: <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>,
   },
   {
+    key: 'cameras',
+    gradient: 'linear-gradient(145deg, #0F2027, #203A43)',
+    icon: <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>,
+  },
+  {
     key: 'security',
     gradient: 'linear-gradient(145deg, #1E3C72, #2A5298)',
     icon: <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>,
